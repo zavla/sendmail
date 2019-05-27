@@ -2,7 +2,7 @@ package sendmail
 
 import (
 	"crypto/tls"
-	"flag"
+	//"flag"
 	"fmt"
 	"log"
 	"net"
@@ -18,10 +18,10 @@ const (
 
 // Usage shows package usage
 func Usage() string {
-	ret = `
-	msgsubj := flag.String("msgsubj", "", "`message subject` is a subject")
-	msgbody := flag.String("msgbody", "", "`message body` is a msg body")
-	senderalias := flag.String("senderalias", "", "`sender alias` is a From: header")
+	ret := `
+	msgsubj := flag.String("msgsubj", "", "message subject is a subject")
+	msgbody := flag.String("msgbody", "", "message body is a msg body")
+	senderalias := flag.String("senderalias", "", "sender alias is a From: header")
 
 	flag.Parse()
 	if len(flag.Args()) != 0 {
@@ -123,27 +123,3 @@ func SendMailToMe(c *smtp.Client, msgsubj, msgbody, senderalias string) {
 
 }
 
-/*
-	resp := []byte("" + "\x00" + "myemail@beer-co.com" + "\x00" + "password")
-	meth := "PLAIN"
-	encoding := base64.StdEncoding
-	resp64 := make([]byte, encoding.EncodedLen(len(resp)))
-	encoding.Encode(resp64, resp)
-
-	id, err := newtextconn.Cmd(strings.TrimSpace(fmt.Sprintf("AUTH %s %s", meth, resp64)))
-
-	if err != nil {
-		log.Fatalf("%s", err)
-	}
-	newtextconn.StartResponse(id)
-	defer newtextconn.EndResponse(id)
-	codeans, msg, err := newtextconn.ReadCodeLine(235)
-	if err != nil {
-		log.Fatalf("%s", err)
-	}
-	fmt.Printf("%s  %s", codeans, msg)
-
-	err = newconn.VerifyHostname(hostbeer) //tls: handshake did not verify certificate chain
-	if err != nil {
-		log.Fatalf("%s", err)
-*/
